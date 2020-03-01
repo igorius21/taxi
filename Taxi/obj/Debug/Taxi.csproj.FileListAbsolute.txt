@@ -1,0 +1,16 @@
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\bin\Debug\Taxi.exe.config
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\bin\Debug\Taxi.exe
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\bin\Debug\Taxi.pdb
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.csprojResolveAssemblyReference.cache
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Form1.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Properties.Resources.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.csproj.GenerateResource.Cache
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.exe
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.pdb
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Owners.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Cars.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.CarMashine.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Stops.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Timetable.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.FixMashine.resources
+D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.NeedReaquest.resources
