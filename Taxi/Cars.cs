@@ -91,7 +91,5 @@ namespace Taxi
             textBoxNameDel.Clear();
             textBoxSernameDel.Clear();
         }
-
-
     }
 }
