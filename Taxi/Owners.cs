@@ -23,6 +23,7 @@ namespace Taxi
         private void Owners_Load(object sender, EventArgs e)
         {
             ReadData();
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         public void ReadData()

@@ -14,19 +14,3 @@ D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Stops.resources
 D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.Timetable.resources
 D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.FixMashine.resources
 D:\Мой УЧЕБНЫЙ ПРОЕКТ\Taxi\Taxi\obj\Debug\Taxi.NeedReaquest.resources
-D:\для гита\taxi\Taxi\bin\Debug\Taxi.exe.config
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.exe
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.pdb
-D:\для гита\taxi\Taxi\bin\Debug\Taxi.exe
-D:\для гита\taxi\Taxi\bin\Debug\Taxi.pdb
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.csprojResolveAssemblyReference.cache
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.CarMashine.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.Cars.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.FixMashine.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.Form1.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.NeedReaquest.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.Owners.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.Properties.Resources.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.Stops.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.Timetable.resources
-D:\для гита\taxi\Taxi\obj\Debug\Taxi.csproj.GenerateResource.Cache

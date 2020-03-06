@@ -23,6 +23,7 @@ namespace Taxi
         private void Cars_Load(object sender, EventArgs e)
         {
             ReadData();
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         public void ReadData()
@@ -91,5 +92,7 @@ namespace Taxi
             textBoxNameDel.Clear();
             textBoxSernameDel.Clear();
         }
+
+
     }
 }

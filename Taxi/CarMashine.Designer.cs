@@ -45,6 +45,9 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.textBoxOwner = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -145,14 +148,14 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(289, 249);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(274, 13);
+            this.label7.Size = new System.Drawing.Size(152, 13);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Посадите на машину водителя и назначьте маршрут";
+            this.label7.Text = "Выберите машину в таблице";
             // 
             // comboBoxDriver
             // 
             this.comboBoxDriver.FormattingEnabled = true;
-            this.comboBoxDriver.Location = new System.Drawing.Point(292, 295);
+            this.comboBoxDriver.Location = new System.Drawing.Point(292, 318);
             this.comboBoxDriver.Name = "comboBoxDriver";
             this.comboBoxDriver.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDriver.TabIndex = 4;
@@ -161,7 +164,7 @@
             // comboBoxRoute
             // 
             this.comboBoxRoute.FormattingEnabled = true;
-            this.comboBoxRoute.Location = new System.Drawing.Point(292, 358);
+            this.comboBoxRoute.Location = new System.Drawing.Point(292, 381);
             this.comboBoxRoute.Name = "comboBoxRoute";
             this.comboBoxRoute.Size = new System.Drawing.Size(121, 21);
             this.comboBoxRoute.TabIndex = 5;
@@ -193,11 +196,41 @@
             this.label8.TabIndex = 3;
             this.label8.Text = "Фамилия владельца";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(291, 295);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(158, 13);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Выберите фамилию водителя";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(292, 356);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(330, 13);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Выберите маршрут, на который установить выбранную машину";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(292, 266);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(174, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "и назначьте водителя и маршрут";
+            // 
             // CarMashine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 558);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.comboBoxRoute);
             this.Controls.Add(this.comboBoxDriver);
@@ -243,5 +276,8 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.TextBox textBoxOwner;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

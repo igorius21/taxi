@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Taxi
 {
@@ -171,13 +172,66 @@ namespace Taxi
 
         public string SearchCars(out string commandText)
         {
-            commandText = "select * from маршрутки where Дата_производства <= (select dateadd(yy,-10, GETDATE()))";
+            commandText = "select * from маршрутки where Дата_производства <= (select dateadd(yy,-9, GETDATE()))";
             return connectionString;
         }
 
         public string SearchRouters(out string commandText)
         {
-            commandText = "select * from маршрутки where Дата_производства <= (select dateadd(yy,-10, GETDATE()))";
+            var count = (File.ReadAllText(@"request2.sql", Encoding.GetEncoding(65001))).Replace("\n", "");
+            commandText = (count.Replace("\r", "")).Replace("\t", "");
+            return connectionString;
+        }
+
+        public int SearchMoney(DateTime a, DateTime b)
+        {
+            command.CommandText = @"SET DATEFORMAT YMD
+                                    select 
+	                                    (select sum(Количество_вошедших_пассажиров) from Фиксация_маршрутки where Номер_маршрутки = 
+		                                    (select Номер_маршрутки from Маршрутки where id_маршрута = '7') 
+			                                       and Дата between '" + a + "' and '" + b + @"') *
+                                    (select Стоимость_маршрута FROM Маршруты where id_маршрута = '7') * 
+                                    (select count(Номер_маршрутки) from Маршрутки where id_маршрута = '7') / 
+                                    (select datediff(day, '" + a + "', '" + b + "') + 1);";
+            conn.Open();
+            var number = Convert.ToInt32(command.ExecuteScalar());
+            conn.Close();
+            return number;
+        }
+
+        public string SearchCarDrive(out string commandText, int a)
+        {
+            commandText = @"CREATE TABLE temp_table (
+                            temp DateTIME,
+                            CarNumber INT
+                            );
+  
+	                        DECLARE @mov INT 
+	                        DECLARE @count INT 
+	                        DECLARE @dav DateTime
+	                        SET @mov = (select count(DISTINCT Номер_маршрутки) FROM Маршрутки where id_маршрута = '"+ a +@"')
+ 
+	                        while @mov > 0
+	                            BEGIN
+	
+		                            SET @mov = @mov - 1
+		
+		                            SET @count = (select DISTINCT (Номер_маршрутки) from Маршрутки where id_маршрута = '"+ a + @"' ORDER BY Номер_маршрутки OFFSET @mov ROWS FETCH NEXT 1 ROWS ONLY)
+		                            SET @dav = (SELECT Фактическое_время_прибытия from Фиксация_маршрутки WHERE Номер_маршрутки = @count and id_типа_маршрута = '1')
+		                            insert into temp_table (temp, CarNumber) values ((select datediff(minute, (select MAX(@dav)), (select MIN(@dav)))), @count)
+
+	                            END;
+	
+	                            SELECT Фамилия, Имя, Отчество FROM Водителя WHERE id_водителя = (SELECT id_водителя FROM Маршрутки WHERE Номер_маршрутки = (SELECT carNumber FROM temp_table WHERE temp = (SELECT max(temp) FROM temp_table)));
+
+                            DROP TABLE temp_table;";
+            return connectionString;
+        }
+
+
+        public string ReadComboBoxRouter(out string commandText)
+        {
+            commandText = "SELECT id_маршрута FROM Маршруты";
             return connectionString;
         }
 

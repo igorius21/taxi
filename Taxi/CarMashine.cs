@@ -18,6 +18,8 @@ namespace Taxi
         public CarMashine()
         {
             InitializeComponent();
+            comboBoxRoute.Enabled = false;
+            comboBoxDriver.Enabled = false;
         }
 
         private void CarMashine_Load(object sender, EventArgs e)
