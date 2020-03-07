@@ -30,7 +30,12 @@ namespace Taxi
         public int Cena { get; set; }
         public int NumberStop { get; set; }
         public string NumberName { get; set; }
-
+        public int NumberDrive { get; set; }
+        public string TypeRouter { get; set; }
+        public string NameStop { get; set; }
+        public DateTime timeDrive { get; set; }
+        public int ManIn { get; set; }
+        public DateTime DateDrive { get; set; }
 
         public int SqlRequest1()
         {
@@ -88,9 +93,9 @@ namespace Taxi
             return connOpen();
         }
 
-        public int SqlRequest9(DateTime date, int numberCar, string idType, string idStop, DateTime time, int numberMan)
+        public int SqlRequest9()
         {
-            command.CommandText = "INSERT INTO Фиксация_маршрутки (Дата, Номер_маршрутки, id_типа_маршрута, id_остановки, Фактическое_время_прибытия, Количество_вошедших_пассажиров) VALUES ('" + date + "', " + numberCar + ", (select id_типа_маршрута from Тип_маршрута where Тип_маршрута = '" + idType + "'), (select id_остановки from остановки where Название_остановки = '" + idStop + "'), '" + time + "', " + numberMan + ")";
+            command.CommandText = "INSERT INTO Фиксация_маршрутки (Дата, Номер_маршрутки, id_типа_маршрута, id_остановки, Фактическое_время_прибытия, Количество_вошедших_пассажиров) VALUES ('" + DateDrive + "', " + NumberDrive + ", (select id_типа_маршрута from Тип_маршрута where Тип_маршрута = '" + TypeRouter + "'), (select id_остановки from остановки where Название_остановки = '" + NameStop + "'), '" + timeDrive + "', " + ManIn + ")";
             return connOpen();
         }
 
@@ -111,7 +116,6 @@ namespace Taxi
 
             return count;
         }
-
 
         public string CarsDriverRead(out string commandText)
         {
@@ -249,11 +253,8 @@ namespace Taxi
                 {
                     MessageBox.Show("Необходимо корректно выбрать даты и правильный маршрут");
                 }
-                
 
                 conn.Close();
-            
-            
             return number;
         }
 
@@ -288,13 +289,11 @@ namespace Taxi
             return connectionString;
         }
 
-
         public string ReadComboBoxRouter(out string commandText)
         {
             commandText = "SELECT id_маршрута FROM Маршруты";
             return connectionString;
         }
-
 
         public void Qwe(out SqlDataReader dataReader, out SqlConnection conn, string commandText, string connectionString)
         {
@@ -305,8 +304,5 @@ namespace Taxi
 
             dataReader = mycommannd.ExecuteReader();
         }
-
-
-
     }
 }

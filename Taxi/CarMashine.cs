@@ -18,7 +18,6 @@ namespace Taxi
         SqlConnection conn;
         string commandText;
         string connectionString;
-        
 
         public CarMashine()
         {
@@ -35,7 +34,6 @@ namespace Taxi
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView.ClearSelection();
             ReadComboFamily();
-            
         }
 
         public void ReadComboFamily()
@@ -57,15 +55,12 @@ namespace Taxi
 
         public void ReadData()
         {
-
-
             string commandText;
             string connectionString = db.CarsMashineRead(out commandText);
             DataTable table = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(commandText, connectionString);
             adapter.Fill(table);
             dataGridView.DataSource = table;
-            
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -95,7 +90,6 @@ namespace Taxi
                 return;
             }
 
-
             if (db.SqlRequest3() == 1)
             {
                 MessageBox.Show("Изменения успешно внесены");
@@ -106,7 +100,6 @@ namespace Taxi
                 MessageBox.Show("Автомобиль должен быть не старше 10 лет со дня производства");
 
             ReadData();
-
         }
 
         private void comboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
@@ -178,7 +171,6 @@ namespace Taxi
         {
             comboBoxDriver.Enabled = true;
         }
-
 
         public void BoxDell()
         {

@@ -28,8 +28,6 @@ namespace Taxi
 
         public void ReadData()
         {
-           
-
             string commandText;
             string connectionString = db.CarsDriverRead(out commandText);
             DataTable table = new DataTable();
@@ -84,14 +82,11 @@ namespace Taxi
             db.Name = textBoxNameDel.Text;
             db.Sername = textBoxSernameDel.Text;
 
-
             db.SqlRequest2();
             ReadData();
-            
 
             BoxDell();
         }
-
 
         public void BoxDell()
         {
@@ -110,7 +105,5 @@ namespace Taxi
             textBoxNameDel.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
             textBoxSernameDel.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
         }
-
-
     }
 }

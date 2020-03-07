@@ -29,12 +29,9 @@ namespace Taxi
 
         public void ReadComboRouter()
         {
-
             connectionString = db.CarsMashineReadRouters(out commandText);
 
             Request(connectionString);
-
-            //db.Qwe(out dataReader, out conn, commandText, connectionString);
 
             while (dataReader.Read())
             {
@@ -53,20 +50,11 @@ namespace Taxi
 
         public void FindCars()
         {
-
             connectionString = db.SearchCars(out commandText);
-
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //SqlCommand mycommannd = conn.CreateCommand();
-            //mycommannd.CommandText = commandText;
-            //conn.Open();
-            //SqlDataReader dataReader;
-            //dataReader = mycommannd.ExecuteReader();
 
             Request(connectionString);
 
             int car = 0;
-
 
             while (dataReader.Read())
             {
@@ -96,14 +84,7 @@ namespace Taxi
         {
             connectionString = db.SearchRouters(out commandText);
 
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //SqlCommand mycommannd = conn.CreateCommand();
-            //mycommannd.CommandText = commandText;
-            //conn.Open();
-
             Request(connectionString);
-            //db.Qwe(out dataReader, out conn, commandText, connectionString);
-            //dataReader = mycommannd.ExecuteReader();
 
             List<int> routers = new List<int>();
 
@@ -146,10 +127,6 @@ namespace Taxi
                 labelIn.Text = "";
                 labelOut.Text = "";
             }
-                
-            
-            
-
         }
 
         private void buttonSeachCar_Click(object sender, EventArgs e)
@@ -165,13 +142,6 @@ namespace Taxi
                 return;
             }
             connectionString = db.SearchCarDrive(out commandText, Convert.ToInt32(comboBox1.Text));
-
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //SqlCommand mycommannd = conn.CreateCommand();
-            //mycommannd.CommandText = commandText;
-            //conn.Open();
-            //SqlDataReader dataReader;
-            //dataReader = mycommannd.ExecuteReader();
 
             Request(connectionString);
 
@@ -199,9 +169,6 @@ namespace Taxi
                 labelSername.Text = "";
             }
             
-
-
-
             dataReader.Close();
             conn.Close();
         }
@@ -209,13 +176,6 @@ namespace Taxi
         public void ReadComboBox()
         {
             connectionString = db.ReadComboBoxRouter(out commandText);
-
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //SqlCommand mycommannd = conn.CreateCommand();
-            //mycommannd.CommandText = commandText;
-            //conn.Open();
-            //SqlDataReader dataReader;
-            //dataReader = mycommannd.ExecuteReader();
 
             Request(connectionString);
 
@@ -229,20 +189,9 @@ namespace Taxi
             conn.Close();
         }
 
-        //public static void Qwe(out SqlDataReader dataReader, out SqlConnection conn, string commandText, string connectionString)
-        //{
-        //    conn = new SqlConnection(connectionString);
-        //    SqlCommand mycommannd = conn.CreateCommand();
-        //    mycommannd.CommandText = commandText;
-        //    conn.Open();
-            
-        //    dataReader = mycommannd.ExecuteReader();
-        //}
-
         public void Request(string connectionString)
         {
             db.Qwe(out dataReader, out conn, commandText, connectionString);
         }
-
     }
 }

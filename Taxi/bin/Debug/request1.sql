@@ -1,1 +1,0 @@
-select * from маршрутки where Дата_производства <= (select dateadd(yy,-9, GETDATE()))

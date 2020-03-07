@@ -47,10 +47,8 @@ namespace Taxi
                 dataGridView.Rows.Add(id, family, name, surname); 
             }
 
-
             dataReader.Close();
             conn.Close();
-
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

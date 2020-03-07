@@ -26,7 +26,6 @@ namespace Taxi
 
         private void FixMashine_Load(object sender, EventArgs e)
         {
-            
             ReadData();
             
             ReadComboBoxType();
@@ -59,9 +58,21 @@ namespace Taxi
                 return;
             }
 
-            if (db.SqlRequest9(Convert.ToDateTime(monthCalendar.SelectionStart.ToShortDateString().ToString()), Convert.ToInt32(comboBox3.Text),
-                comboBox1.Text, comboBox2.Text, 
-                Convert.ToDateTime(textBoxFixTime.Text), Convert.ToInt32(textBoxNumberMan.Text)) == 1)
+            try
+            {
+                db.NumberDrive = Convert.ToInt32(comboBox3.Text);
+                db.TypeRouter = comboBox1.Text;
+                db.NameStop = comboBox2.Text;
+                db.timeDrive = Convert.ToDateTime(textBoxFixTime.Text);
+                db.ManIn = Convert.ToInt32(textBoxNumberMan.Text);
+                db.DateDrive = Convert.ToDateTime(monthCalendar.SelectionStart.ToShortDateString().ToString());
+            }
+            catch
+            {
+
+            }
+
+            if (db.SqlRequest9() == 1)
             {
                 MessageBox.Show("Изменения успешно внесены!");
                 ReadData();
@@ -71,20 +82,11 @@ namespace Taxi
                 MessageBox.Show("Невозможно зафиксировать время прибытия машины");
         }
 
-
         public void ReadComboBoxType()
         {
             connectionString = db.ReadComboBoxType(out commandText);
 
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //SqlCommand mycommannd = conn.CreateCommand();
-            //mycommannd.CommandText = commandText;
-            //conn.Open();
-            //SqlDataReader dataReader;
-            //dataReader = mycommannd.ExecuteReader();
             Request(connectionString);
-
-            //db.Qwe(out dataReader, out conn, commandText, connectionString);
 
             while (dataReader.Read())
             {
@@ -101,15 +103,7 @@ namespace Taxi
 
             connectionString = db.ReadComboBoxStop(out commandText);
 
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //SqlCommand mycommannd = conn.CreateCommand();
-            //mycommannd.CommandText = commandText;
-            //conn.Open();
-            //SqlDataReader dataReader;
-            //dataReader = mycommannd.ExecuteReader();
             Request(connectionString);
-
-            //db.Qwe(out dataReader, out conn, commandText, connectionString);
 
             while (dataReader.Read())
             {
@@ -125,16 +119,7 @@ namespace Taxi
         {
             connectionString = db.ReadComboBoxNumberCar(out commandText);
 
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //SqlCommand mycommannd = conn.CreateCommand();
-            //mycommannd.CommandText = commandText;
-            //conn.Open();
-            //SqlDataReader dataReader;
-            //dataReader = mycommannd.ExecuteReader();
-
             Request(connectionString);
-
-            //db.Qwe(out dataReader, out conn, commandText, connectionString);
 
             while (dataReader.Read())
             {
@@ -150,7 +135,5 @@ namespace Taxi
         {
             db.Qwe(out dataReader, out conn, commandText, connectionString);
         }
-
-
     }
 }
