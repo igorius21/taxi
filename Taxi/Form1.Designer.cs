@@ -111,6 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(537, 394);
             this.Controls.Add(this.buttonReaquest);
             this.Controls.Add(this.buttonFixMashine);
@@ -119,7 +120,9 @@
             this.Controls.Add(this.CarMashine);
             this.Controls.Add(this.buttonCar);
             this.Controls.Add(this.buttonOwners);
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
 

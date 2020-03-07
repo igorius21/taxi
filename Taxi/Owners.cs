@@ -18,7 +18,9 @@ namespace Taxi
             InitializeComponent();
         }
 
-        DbType db;
+        DbType db = new DbType();
+        SqlDataReader dataReader;
+        SqlConnection conn;
 
         private void Owners_Load(object sender, EventArgs e)
         {
@@ -28,14 +30,26 @@ namespace Taxi
 
         public void ReadData()
         {
-            db = new DbType();
+            dataGridView.Rows.Clear();
 
             string commandText;
             string connectionString = db.CarsOwnerRead(out commandText);
-            DataTable table = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(commandText, connectionString);
-            adapter.Fill(table);
-            dataGridView.DataSource = table;
+
+            db.Qwe(out dataReader, out conn, commandText, connectionString);
+
+            while (dataReader.Read())
+            {
+                int id = dataReader.GetInt32(0);
+                string family = dataReader.GetString(1);
+                string name = dataReader.GetString(2);
+                string surname = dataReader.GetString(3);
+
+                dataGridView.Rows.Add(id, family, name, surname); 
+            }
+
+
+            dataReader.Close();
+            conn.Close();
 
         }
 
@@ -46,18 +60,30 @@ namespace Taxi
 
         public void AddOwner()
         {
-            db = new DbType();
+            if (textBoxFamily.Text == "" || textBoxName.Text == "" || textBoxSername.Text == "")
+            {
+                MessageBox.Show("Ни все поля заполнены");
+                return;
+            }
+            db.Family = textBoxFamily.Text;
+            db.Name = textBoxName.Text;
+            db.Sername = textBoxSername.Text;
 
-            if (db.SqlRequest8(textBoxFamily.Text, textBoxName.Text, textBoxSername.Text) == 1)
+
+            if (db.SqlRequest8() == 1)
             {
                 MessageBox.Show("Изменения успешно внесены!");
-                ReadData();
+                
             }
 
             else
                 MessageBox.Show("Не удалось внести изменения!");
 
             ReadData();
+            textBoxFamily.Clear();
+            textBoxName.Clear();
+            textBoxSername.Clear();
+
         }
 
     }

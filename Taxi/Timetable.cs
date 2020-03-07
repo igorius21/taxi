@@ -18,7 +18,7 @@ namespace Taxi
             InitializeComponent();
         }
 
-        DbType db;
+        DbType db = new DbType();
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -27,7 +27,12 @@ namespace Taxi
 
         public void AddRoute()
         {
-            db = new DbType();
+            if (textBoxIdRouter.Text == "" || textBoxIdTipeRouter.Text == "" || textBoxIdStop.Text == "" || textBoxTime.Text == "")
+            {
+                MessageBox.Show("Ни все поля заполнены");
+                return;
+            }
+
 
             if (db.SqlRequest7(Convert.ToInt32(textBoxIdRouter.Text), Convert.ToInt32(textBoxIdTipeRouter.Text), 
                 Convert.ToInt32(textBoxIdStop.Text), Convert.ToDateTime(textBoxTime.Text)) == 1)
@@ -56,6 +61,7 @@ namespace Taxi
         private void Timetable_Load(object sender, EventArgs e)
         {
             ReadRouters();
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
     }
 }

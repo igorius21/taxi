@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Taxi
 {
@@ -18,22 +19,35 @@ namespace Taxi
         static SqlConnection conn = new SqlConnection(connectionString);
         public static SqlCommand command = conn.CreateCommand();
 
-        public int SqlRequest1(string family, string name, string sername, DateTime date)
+        public string Family { get; set; }
+        public string Name { get; set; }
+        public string Sername { get; set; }
+        public DateTime Date { get; set; }
+        public int NumberCar { get; set; }
+        public string Mark { get; set; }
+        public string Manufacture { get; set; }
+        public int NumberRouter { get; set; }
+        public int Cena { get; set; }
+        public int NumberStop { get; set; }
+        public string NumberName { get; set; }
+
+
+        public int SqlRequest1()
         {
-            command.CommandText = "IF '" + date + "' < dateadd(yy,-3, GETDATE()) INSERT INTO Водителя (Фамилия, Имя, Отчество, Дата_получения_прав) VALUES ('" + family + "', '" + name + "', '" + sername + "', '" + date + "')";
+            command.CommandText = "IF '" + Date + "' < dateadd(yy,-3, GETDATE()) INSERT INTO Водителя (Фамилия, Имя, Отчество, Дата_получения_прав) VALUES ('" + Family + "', '" + Name + "', '" + Sername + "', '" + Date + "')";
             return connOpen();
 
         }
 
-        public int SqlRequest2(string family, string name, string sername)
+        public int SqlRequest2()
         {
-            command.CommandText = "DELETE FROM Водителя WHERE Фамилия = '" + family + "' AND Имя = '" + name + "' AND Отчество = '" + sername + "'";
+            command.CommandText = "DELETE FROM Водителя WHERE Фамилия = '" + Family + "' AND Имя = '" + Name + "' AND Отчество = '" + Sername + "'";
             return connOpen();
         }
 
-        public int SqlRequest3(int number, string mark, string manufacturer, DateTime date, string owner)
+        public int SqlRequest3()
         {
-            command.CommandText = "IF '" + date + "' > dateadd(yy,-10, GETDATE()) INSERT INTO Маршрутки (Номер_маршрутки, id_владельца, Марка, Производитель, Дата_производства) VALUES (" + number + ", (select id_владельца from владельцы where Фамилия = '" + owner + "'), '" + mark + "', '" + manufacturer + "', '" + date + "')";
+            command.CommandText = "IF '" + Date + "' > dateadd(yy,-10, GETDATE()) INSERT INTO Маршрутки (Номер_маршрутки, id_владельца, Марка, Производитель, Дата_производства) VALUES (" + NumberCar + ", (select id_владельца from владельцы where Фамилия = '" + Family + "'), '" + Mark + "', '" + Manufacture + "', '" + Date + "')";
             return connOpen();
         }
 
@@ -50,15 +64,15 @@ namespace Taxi
             return connOpen();
         }
 
-        public int SqlRequest6(int values1, int values2)
+        public int SqlRequest6()
         {
-            command.CommandText = "INSERT INTO Маршруты (id_маршрута, Стоимость_маршрута) VALUES (" + values1 +", " + values2 + ")";
+            command.CommandText = "INSERT INTO Маршруты (id_маршрута, Стоимость_маршрута) VALUES (" + NumberRouter +", " + Cena + ")";
             return connOpen();
         }
 
-        public int SqlRequest7(int values1, string values2)
+        public int SqlRequest7()
         {
-            command.CommandText = "INSERT INTO Остановки (id_остановки, Название_остановки) VALUES (" + values1 + ", '" + values2 + "')";
+            command.CommandText = "INSERT INTO Остановки (id_остановки, Название_остановки) VALUES (" + NumberStop + ", '" + NumberName + "')";
             return connOpen();
         }
 
@@ -68,9 +82,9 @@ namespace Taxi
             return connOpen();
         }
 
-        public int SqlRequest8(string family, string name, string sername)
+        public int SqlRequest8()
         {
-            command.CommandText = "INSERT INTO Владельцы (Фамилия, Имя, Отчество) VALUES ('" + family + "', '" + name + "', '" + sername + "')";
+            command.CommandText = "INSERT INTO Владельцы (Фамилия, Имя, Отчество) VALUES ('" + Family + "', '" + Name + "', '" + Sername + "')";
             return connOpen();
         }
 
@@ -82,9 +96,19 @@ namespace Taxi
 
         public int connOpen()
         {
-            conn.Open();
-            count = command.ExecuteNonQuery();
-            conn.Close();
+
+                conn.Open();
+                try
+                {
+                    count = command.ExecuteNonQuery();
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно изменить данные", "Ошибка!");
+                }
+                
+                conn.Close();
+
             return count;
         }
 
@@ -170,6 +194,12 @@ namespace Taxi
             return connectionString;
         }
 
+        public string ReadFamily(out string commandText)
+        {
+            commandText = "SELECT Фамилия FROM Владельцы";
+            return connectionString;
+        }
+
         public string SearchCars(out string commandText)
         {
             commandText = "select * from маршрутки where Дата_производства <= (select dateadd(yy,-9, GETDATE()))";
@@ -183,19 +213,47 @@ namespace Taxi
             return connectionString;
         }
 
-        public int SearchMoney(DateTime a, DateTime b)
+        public int SearchMoney(DateTime a, DateTime b, int c)
         {
-            command.CommandText = @"SET DATEFORMAT YMD
-                                    select 
-	                                    (select sum(Количество_вошедших_пассажиров) from Фиксация_маршрутки where Номер_маршрутки = 
-		                                    (select Номер_маршрутки from Маршрутки where id_маршрута = '7') 
-			                                       and Дата between '" + a + "' and '" + b + @"') *
-                                    (select Стоимость_маршрута FROM Маршруты where id_маршрута = '7') * 
-                                    (select count(Номер_маршрутки) from Маршрутки where id_маршрута = '7') / 
-                                    (select datediff(day, '" + a + "', '" + b + "') + 1);";
-            conn.Open();
-            var number = Convert.ToInt32(command.ExecuteScalar());
-            conn.Close();
+            var number = 0;
+            command.CommandText = @"CREATE TABLE temp_table (
+                                    CarNumber INT
+                                    );
+  
+	                                DECLARE @mov INT 
+	                                DECLARE @count INT 
+	                                DECLARE @dav int
+	                                SET @mov = (select count(DISTINCT Номер_маршрутки) FROM Маршрутки where id_маршрута = '"+ c + @"')
+
+	                                    while @mov > 0
+		                                    BEGIN
+	
+			                                    SET @mov = @mov - 1
+			                                    SET @count = (select DISTINCT (Номер_маршрутки) from Маршрутки where id_маршрута = '"+ c + @"' ORDER BY Номер_маршрутки OFFSET @mov ROWS FETCH NEXT 1 ROWS ONLY)
+			                                    SET @dav = (select SUM(Количество_вошедших_пассажиров) from Фиксация_маршрутки where Номер_маршрутки = @count AND Фактическое_время_прибытия >= CONVERT(DATETIME,'"+ a + @"',104) AND Фактическое_время_прибытия <= CONVERT(DATETIME,'"+ b + @"',104))
+
+                                                insert into temp_table (CarNumber) values (@dav)
+
+		                                    END;
+
+		                                    select ((select sum(CarNumber) from temp_table) * (select Стоимость_маршрута FROM Маршруты where id_маршрута = '"+ c + @"') / (select datediff(day, '"+ a + @"', '"+ b + @"') + 1))
+
+		                                    drop table temp_table";
+            
+                conn.Open();
+                try
+                {
+                    number = Convert.ToInt32(command.ExecuteScalar());
+                }
+                catch
+                {
+                    MessageBox.Show("Необходимо корректно выбрать даты и правильный маршрут");
+                }
+                
+
+                conn.Close();
+            
+            
             return number;
         }
 
@@ -208,8 +266,9 @@ namespace Taxi
   
 	                        DECLARE @mov INT 
 	                        DECLARE @count INT 
-	                        DECLARE @dav DateTime
-	                        SET @mov = (select count(DISTINCT Номер_маршрутки) FROM Маршрутки where id_маршрута = '"+ a +@"')
+	                        DECLARE @timeMax DateTime
+                            DECLARE @timeMin DateTime
+	                        SET @mov = (select count(DISTINCT Номер_маршрутки) FROM Маршрутки where id_маршрута = '" + a +@"')
  
 	                        while @mov > 0
 	                            BEGIN
@@ -217,8 +276,9 @@ namespace Taxi
 		                            SET @mov = @mov - 1
 		
 		                            SET @count = (select DISTINCT (Номер_маршрутки) from Маршрутки where id_маршрута = '"+ a + @"' ORDER BY Номер_маршрутки OFFSET @mov ROWS FETCH NEXT 1 ROWS ONLY)
-		                            SET @dav = (SELECT Фактическое_время_прибытия from Фиксация_маршрутки WHERE Номер_маршрутки = @count and id_типа_маршрута = '1')
-		                            insert into temp_table (temp, CarNumber) values ((select datediff(minute, (select MAX(@dav)), (select MIN(@dav)))), @count)
+		                            SET @timeMax = (SELECT max(Фактическое_время_прибытия) from Фиксация_маршрутки WHERE Номер_маршрутки = @count and id_типа_маршрута = '1')
+		                            SET @timeMin = (SELECT min(Фактическое_время_прибытия) from Фиксация_маршрутки WHERE Номер_маршрутки = @count and id_типа_маршрута = '1')
+		                            insert into temp_table (temp, CarNumber) values ((select datediff(minute, (select @timeMax), (select @timeMin))), @count)
 
 	                            END;
 	
@@ -234,6 +294,19 @@ namespace Taxi
             commandText = "SELECT id_маршрута FROM Маршруты";
             return connectionString;
         }
+
+
+        public void Qwe(out SqlDataReader dataReader, out SqlConnection conn, string commandText, string connectionString)
+        {
+            conn = new SqlConnection(connectionString);
+            SqlCommand mycommannd = conn.CreateCommand();
+            mycommannd.CommandText = commandText;
+            conn.Open();
+
+            dataReader = mycommannd.ExecuteReader();
+        }
+
+
 
     }
 }

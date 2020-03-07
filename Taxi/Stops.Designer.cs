@@ -53,7 +53,7 @@
             this.dataGridViewRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRoute.Location = new System.Drawing.Point(23, 46);
             this.dataGridViewRoute.Name = "dataGridViewRoute";
-            this.dataGridViewRoute.Size = new System.Drawing.Size(250, 150);
+            this.dataGridViewRoute.Size = new System.Drawing.Size(243, 133);
             this.dataGridViewRoute.TabIndex = 0;
             // 
             // label1
@@ -188,7 +188,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 466);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(633, 466);
             this.Controls.Add(this.buttonStopAdd);
             this.Controls.Add(this.buttonRouteAdd);
             this.Controls.Add(this.label8);
@@ -205,7 +206,9 @@
             this.Controls.Add(this.dataGridViewStops);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridViewRoute);
+            this.MaximizeBox = false;
             this.Name = "Stops";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Stops";
             this.Load += new System.EventHandler(this.Stops_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).EndInit();

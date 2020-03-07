@@ -56,6 +56,8 @@
             this.labelSername = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxRouter = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -157,13 +159,13 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(18, 302);
+            this.monthCalendar1.Location = new System.Drawing.Point(17, 335);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 12;
             // 
             // monthCalendar2
             // 
-            this.monthCalendar2.Location = new System.Drawing.Point(214, 303);
+            this.monthCalendar2.Location = new System.Drawing.Point(213, 335);
             this.monthCalendar2.Name = "monthCalendar2";
             this.monthCalendar2.TabIndex = 13;
             // 
@@ -220,7 +222,7 @@
             // 
             // buttonMoney
             // 
-            this.buttonMoney.Location = new System.Drawing.Point(320, 261);
+            this.buttonMoney.Location = new System.Drawing.Point(297, 302);
             this.buttonMoney.Name = "buttonMoney";
             this.buttonMoney.Size = new System.Drawing.Size(75, 23);
             this.buttonMoney.TabIndex = 20;
@@ -233,14 +235,14 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(14, 278);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(296, 13);
+            this.label9.Size = new System.Drawing.Size(387, 13);
             this.label9.TabIndex = 21;
-            this.label9.Text = "Выберите значение на календаре и нажмите рассчитать";
+            this.label9.Text = "Выберите значение на календаре, номер маршрута и нажмите рассчитать";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 496);
+            this.label10.Location = new System.Drawing.Point(12, 517);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(235, 13);
             this.label10.TabIndex = 22;
@@ -248,7 +250,7 @@
             // 
             // buttonSeachCar
             // 
-            this.buttonSeachCar.Location = new System.Drawing.Point(12, 578);
+            this.buttonSeachCar.Location = new System.Drawing.Point(11, 599);
             this.buttonSeachCar.Name = "buttonSeachCar";
             this.buttonSeachCar.Size = new System.Drawing.Size(75, 23);
             this.buttonSeachCar.TabIndex = 23;
@@ -259,7 +261,7 @@
             // labelFamily
             // 
             this.labelFamily.AutoSize = true;
-            this.labelFamily.Location = new System.Drawing.Point(144, 538);
+            this.labelFamily.Location = new System.Drawing.Point(143, 559);
             this.labelFamily.Name = "labelFamily";
             this.labelFamily.Size = new System.Drawing.Size(0, 13);
             this.labelFamily.TabIndex = 24;
@@ -267,7 +269,7 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(211, 543);
+            this.labelName.Location = new System.Drawing.Point(210, 564);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(0, 13);
             this.labelName.TabIndex = 25;
@@ -275,7 +277,7 @@
             // labelSername
             // 
             this.labelSername.AutoSize = true;
-            this.labelSername.Location = new System.Drawing.Point(320, 538);
+            this.labelSername.Location = new System.Drawing.Point(319, 559);
             this.labelSername.Name = "labelSername";
             this.labelSername.Size = new System.Drawing.Size(0, 13);
             this.labelSername.TabIndex = 26;
@@ -283,7 +285,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 519);
+            this.label11.Location = new System.Drawing.Point(12, 540);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(104, 13);
             this.label11.TabIndex = 27;
@@ -291,17 +293,39 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 538);
+            this.comboBox1.Location = new System.Drawing.Point(12, 559);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 28;
+            // 
+            // comboBoxRouter
+            // 
+            this.comboBoxRouter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRouter.FormattingEnabled = true;
+            this.comboBoxRouter.Location = new System.Drawing.Point(132, 302);
+            this.comboBoxRouter.Name = "comboBoxRouter";
+            this.comboBoxRouter.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxRouter.TabIndex = 29;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 304);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(94, 13);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Номер маршрута";
             // 
             // NeedReaquest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 632);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(597, 647);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.comboBoxRouter);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.labelSername);
@@ -330,7 +354,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "NeedReaquest";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "NeedReaquest";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -367,5 +393,7 @@
         private System.Windows.Forms.Label labelSername;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxRouter;
+        private System.Windows.Forms.Label label12;
     }
 }

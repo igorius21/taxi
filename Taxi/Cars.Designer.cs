@@ -47,8 +47,7 @@
             this.textBoxSernameDel = new System.Windows.Forms.TextBox();
             this.buttonDel = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBoxDate = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,11 +58,12 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(548, 158);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 237);
+            this.label1.Location = new System.Drawing.Point(164, 237);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 13);
             this.label1.TabIndex = 1;
@@ -81,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(76, 292);
+            this.label3.Location = new System.Drawing.Point(183, 292);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 3;
@@ -90,7 +90,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(101, 334);
+            this.label4.Location = new System.Drawing.Point(208, 334);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 4;
@@ -99,7 +99,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(76, 380);
+            this.label5.Location = new System.Drawing.Point(183, 380);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 5;
@@ -116,28 +116,28 @@
             // 
             // textBoxFamily
             // 
-            this.textBoxFamily.Location = new System.Drawing.Point(139, 284);
+            this.textBoxFamily.Location = new System.Drawing.Point(246, 284);
             this.textBoxFamily.Name = "textBoxFamily";
             this.textBoxFamily.Size = new System.Drawing.Size(100, 20);
             this.textBoxFamily.TabIndex = 7;
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(139, 326);
+            this.textBoxName.Location = new System.Drawing.Point(246, 326);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(100, 20);
             this.textBoxName.TabIndex = 8;
             // 
             // textBoxSername
             // 
-            this.textBoxSername.Location = new System.Drawing.Point(139, 372);
+            this.textBoxSername.Location = new System.Drawing.Point(246, 372);
             this.textBoxSername.Name = "textBoxSername";
             this.textBoxSername.Size = new System.Drawing.Size(100, 20);
             this.textBoxSername.TabIndex = 9;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(139, 465);
+            this.buttonAdd.Location = new System.Drawing.Point(246, 428);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(96, 44);
             this.buttonAdd.TabIndex = 10;
@@ -206,36 +206,25 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 428);
+            this.label10.Location = new System.Drawing.Point(15, 287);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(115, 13);
             this.label10.TabIndex = 11;
             this.label10.Text = "Дата получения прав";
             // 
-            // textBoxDate
+            // monthCalendar
             // 
-            this.textBoxDate.Location = new System.Drawing.Point(139, 420);
-            this.textBoxDate.Name = "textBoxDate";
-            this.textBoxDate.Size = new System.Drawing.Size(100, 20);
-            this.textBoxDate.TabIndex = 12;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.Chocolate;
-            this.label11.Location = new System.Drawing.Point(246, 428);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(61, 13);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "yyyy-mm-dd";
+            this.monthCalendar.Location = new System.Drawing.Point(7, 310);
+            this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.TabIndex = 14;
             // 
             // Cars
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 521);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBoxDate);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(723, 492);
+            this.Controls.Add(this.monthCalendar);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
@@ -255,7 +244,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
+            this.MaximizeBox = false;
             this.Name = "Cars";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cars";
             this.Load += new System.EventHandler(this.Cars_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -284,8 +275,7 @@
         private System.Windows.Forms.TextBox textBoxSernameDel;
         private System.Windows.Forms.Button buttonDel;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBoxDate;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.MonthCalendar monthCalendar;
     }
 }

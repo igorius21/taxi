@@ -13,7 +13,7 @@ namespace Taxi
 {
     public partial class Cars : Form
     {
-        DbType db;
+        DbType db = new DbType();
 
         public Cars()
         {
@@ -28,7 +28,7 @@ namespace Taxi
 
         public void ReadData()
         {
-            db = new DbType();
+           
 
             string commandText;
             string connectionString = db.CarsDriverRead(out commandText);
@@ -45,9 +45,17 @@ namespace Taxi
 
         public void CarAdd()
         {
-            db = new DbType();
-           
-            if (db.SqlRequest1(textBoxFamily.Text, textBoxName.Text, textBoxSername.Text, Convert.ToDateTime(textBoxDate.Text)) == 1)
+            if (textBoxFamily.Text == "" || textBoxName.Text == "" || textBoxSername.Text == "")
+            {
+                MessageBox.Show("Ни все поля заполнены");
+                return;
+            }
+            db.Family = textBoxFamily.Text;
+            db.Name = textBoxName.Text;
+            db.Sername = textBoxSername.Text;
+            db.Date = Convert.ToDateTime(monthCalendar.SelectionStart.ToShortDateString().ToString());
+
+            if (db.SqlRequest1() == 1)
             {
                 MessageBox.Show("Изменения успешно внесены!");
                 ReadData();
@@ -67,16 +75,19 @@ namespace Taxi
 
         public void CarDell()
         {
-            db = new DbType();
-
-            if (db.SqlRequest2(textBoxFamilyDel.Text, textBoxNameDel.Text, textBoxSernameDel.Text) != -1)
+            if (textBoxFamilyDel.Text == "" || textBoxNameDel.Text == "" || textBoxSernameDel.Text == "")
             {
-                MessageBox.Show("Изменения успешно внесены!");
-                ReadData();
+                MessageBox.Show("Ни все поля заполнены");
+                return;
             }
+            db.Family = textBoxFamilyDel.Text;
+            db.Name = textBoxNameDel.Text;
+            db.Sername = textBoxSernameDel.Text;
 
-            else
-                MessageBox.Show("Невозможно удалить водителя");
+
+            db.SqlRequest2();
+            ReadData();
+            
 
             BoxDell();
         }
@@ -87,10 +98,17 @@ namespace Taxi
             textBoxFamily.Clear();
             textBoxName.Clear();
             textBoxSername.Clear();
-            textBoxDate.Clear();
+            
             textBoxFamilyDel.Clear();
             textBoxNameDel.Clear();
             textBoxSernameDel.Clear();
+        }
+
+        private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            textBoxFamilyDel.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
+            textBoxNameDel.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
+            textBoxSernameDel.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
         }
 
 

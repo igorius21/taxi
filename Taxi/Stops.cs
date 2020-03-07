@@ -13,7 +13,7 @@ namespace Taxi
 {
     public partial class Stops : Form
     {
-        DbType db;
+        DbType db = new DbType();
 
         public Stops()
         {
@@ -32,23 +32,59 @@ namespace Taxi
 
         public void AddRoute()
         {
-            db = new DbType();
+            if (textBoxRoute.Text == "" || textBoxCena.Text == "")
+            {
+                MessageBox.Show("Ни все поля заполнены");
+                return;
+            }
 
-            if (db.SqlRequest6(Convert.ToInt32(textBoxRoute.Text),Convert.ToInt32(textBoxCena.Text)) == 1)
+            try
+            {
+                db.NumberRouter = Convert.ToInt32(textBoxRoute.Text);
+                db.Cena = Convert.ToInt32(textBoxCena.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Данные введены в неправильном формате");
+                BoxDell();
+                return;
+            }
+
+            if (db.SqlRequest6() == 1)
             {
                 MessageBox.Show("Изменения успешно внесены!");
+
                 ReadRouters();
             }
 
             else
                 MessageBox.Show("Невозможно добавить маршрут");
+
+            BoxDell();
         }
 
         public void AddStop()
         {
-            db = new DbType();
+            if (textBoxStop.Text == "" || textBoxNameStop.Text == "")
+            {
+                MessageBox.Show("Ни все поля заполнены");
+                return;
+            }
 
-            if (db.SqlRequest7(Convert.ToInt32(textBoxStop.Text), textBoxNameStop.Text) == 1)
+            try
+            {
+                db.NumberStop = Convert.ToInt32(textBoxStop.Text);
+                db.NumberName = textBoxNameStop.Text;
+            }
+            catch
+            {
+                MessageBox.Show("Данные введены в неправильном формате");
+                BoxDell();
+                return;
+            }
+
+
+            if (db.SqlRequest7() == 1)
             {
                 MessageBox.Show("Изменения успешно внесены!");
                 ReadStops();
@@ -56,17 +92,21 @@ namespace Taxi
 
             else
                 MessageBox.Show("Невозможно добавить остановку");
+
+            BoxDell();
         }
 
         private void Stops_Load(object sender, EventArgs e)
         {
             ReadStops();
             ReadRouters();
+            dataGridViewRoute.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewStops.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
         }
 
         public void ReadRouters()
         {
-            db = new DbType();
 
             string commandText;
             string connectionString = db.ReadRouters(out commandText);
@@ -78,7 +118,6 @@ namespace Taxi
 
         public void ReadStops()
         {
-            db = new DbType();
 
             string commandText;
             string connectionString = db.ReadStops(out commandText);
@@ -86,6 +125,15 @@ namespace Taxi
             SqlDataAdapter adapter = new SqlDataAdapter(commandText, connectionString);
             adapter.Fill(table);
             dataGridViewStops.DataSource = table;
+        }
+
+        public void BoxDell()
+        {
+            textBoxRoute.Clear();
+            textBoxCena.Clear();
+            textBoxStop.Clear();
+
+            textBoxNameStop.Clear();
         }
     }
 }

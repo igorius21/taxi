@@ -17,9 +17,34 @@ namespace Taxi
         {
             InitializeComponent();
             ReadComboBox();
+            ReadComboRouter();
+            comboBoxRouter.Text = "7";
         }
 
-        DbType db;
+        DbType db = new DbType();
+        SqlDataReader dataReader;
+        SqlConnection conn;
+        string connectionString;
+        string commandText;
+
+        public void ReadComboRouter()
+        {
+
+            connectionString = db.CarsMashineReadRouters(out commandText);
+
+            Request(connectionString);
+
+            //db.Qwe(out dataReader, out conn, commandText, connectionString);
+
+            while (dataReader.Read())
+            {
+                int route = dataReader.GetInt32(0);
+                comboBoxRouter.Items.Add(route);
+            }
+
+            dataReader.Close();
+            conn.Close();
+        }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -28,17 +53,17 @@ namespace Taxi
 
         public void FindCars()
         {
-            db = new DbType();
 
-            string commandText;
-            string connectionString = db.SearchCars(out commandText);
+            connectionString = db.SearchCars(out commandText);
 
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand mycommannd = conn.CreateCommand();
-            mycommannd.CommandText = commandText;
-            conn.Open();
-            SqlDataReader dataReader;
-            dataReader = mycommannd.ExecuteReader();
+            //SqlConnection conn = new SqlConnection(connectionString);
+            //SqlCommand mycommannd = conn.CreateCommand();
+            //mycommannd.CommandText = commandText;
+            //conn.Open();
+            //SqlDataReader dataReader;
+            //dataReader = mycommannd.ExecuteReader();
+
+            Request(connectionString);
 
             int car = 0;
 
@@ -69,17 +94,16 @@ namespace Taxi
 
         public void SearchRouter()
         {
-            db = new DbType();
+            connectionString = db.SearchRouters(out commandText);
 
-            string commandText;
-            string connectionString = db.SearchRouters(out commandText);
+            //SqlConnection conn = new SqlConnection(connectionString);
+            //SqlCommand mycommannd = conn.CreateCommand();
+            //mycommannd.CommandText = commandText;
+            //conn.Open();
 
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand mycommannd = conn.CreateCommand();
-            mycommannd.CommandText = commandText;
-            conn.Open();
-            SqlDataReader dataReader;
-            dataReader = mycommannd.ExecuteReader();
+            Request(connectionString);
+            //db.Qwe(out dataReader, out conn, commandText, connectionString);
+            //dataReader = mycommannd.ExecuteReader();
 
             List<int> routers = new List<int>();
 
@@ -106,13 +130,24 @@ namespace Taxi
         {
             DateTime a = Convert.ToDateTime(monthCalendar1.SelectionStart.ToShortDateString().ToString());
             DateTime b = Convert.ToDateTime(monthCalendar2.SelectionStart.ToShortDateString().ToString());
+            int c = Convert.ToInt32(comboBoxRouter.Text);
 
-            labelIn.Text = a.ToString();
-            labelOut.Text = b.ToString();
+            labelIn.Text = a.ToShortDateString();
+            labelOut.Text = b.ToShortDateString();
 
             db = new DbType();
+            var number = db.SearchMoney(a, b, c);
 
-            labelMoney.Text = db.SearchMoney(a, b).ToString();
+            if (number != 0)
+                labelMoney.Text = number.ToString() + "- рублей";
+            else
+            {
+                labelMoney.Text = "";
+                labelIn.Text = "";
+                labelOut.Text = "";
+            }
+                
+            
             
 
         }
@@ -124,17 +159,21 @@ namespace Taxi
 
         public void SearchCarDrive()
         {
-            db = new DbType();
+            if (comboBox1.Text == "")
+            {
+                MessageBox.Show("Ни все поля заполнены");
+                return;
+            }
+            connectionString = db.SearchCarDrive(out commandText, Convert.ToInt32(comboBox1.Text));
 
-            string commandText;
-            string connectionString = db.SearchCarDrive(out commandText, Convert.ToInt32(comboBox1.Text));
+            //SqlConnection conn = new SqlConnection(connectionString);
+            //SqlCommand mycommannd = conn.CreateCommand();
+            //mycommannd.CommandText = commandText;
+            //conn.Open();
+            //SqlDataReader dataReader;
+            //dataReader = mycommannd.ExecuteReader();
 
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand mycommannd = conn.CreateCommand();
-            mycommannd.CommandText = commandText;
-            conn.Open();
-            SqlDataReader dataReader;
-            dataReader = mycommannd.ExecuteReader();
+            Request(connectionString);
 
             string[] carsDriver = new string[3];
 
@@ -146,9 +185,20 @@ namespace Taxi
                 carsDriver[2] = dataReader.GetString(2);
             }
 
-            labelFamily.Text = carsDriver[0].ToString();
-            labelName.Text = carsDriver[1].ToString();
-            labelSername.Text = carsDriver[2].ToString();
+            try
+            {
+                labelFamily.Text = carsDriver[0].ToString();
+                labelName.Text = carsDriver[1].ToString();
+                labelSername.Text = carsDriver[2].ToString();
+            }
+            catch
+            {
+                MessageBox.Show("На данному маршруте никто не работает");
+                labelFamily.Text = "";
+                labelName.Text = "";
+                labelSername.Text = "";
+            }
+            
 
 
 
@@ -158,17 +208,16 @@ namespace Taxi
 
         public void ReadComboBox()
         {
-            db = new DbType();
+            connectionString = db.ReadComboBoxRouter(out commandText);
 
-            string commandText;
-            string connectionString = db.ReadComboBoxRouter(out commandText);
+            //SqlConnection conn = new SqlConnection(connectionString);
+            //SqlCommand mycommannd = conn.CreateCommand();
+            //mycommannd.CommandText = commandText;
+            //conn.Open();
+            //SqlDataReader dataReader;
+            //dataReader = mycommannd.ExecuteReader();
 
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand mycommannd = conn.CreateCommand();
-            mycommannd.CommandText = commandText;
-            conn.Open();
-            SqlDataReader dataReader;
-            dataReader = mycommannd.ExecuteReader();
+            Request(connectionString);
 
             while (dataReader.Read())
             {
@@ -178,6 +227,21 @@ namespace Taxi
 
             dataReader.Close();
             conn.Close();
+        }
+
+        //public static void Qwe(out SqlDataReader dataReader, out SqlConnection conn, string commandText, string connectionString)
+        //{
+        //    conn = new SqlConnection(connectionString);
+        //    SqlCommand mycommannd = conn.CreateCommand();
+        //    mycommannd.CommandText = commandText;
+        //    conn.Open();
+            
+        //    dataReader = mycommannd.ExecuteReader();
+        //}
+
+        public void Request(string connectionString)
+        {
+            db.Qwe(out dataReader, out conn, commandText, connectionString);
         }
 
     }

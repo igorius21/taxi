@@ -43,6 +43,7 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,11 +175,23 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Выберите дату и другие значения";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Brown;
+            this.label8.Location = new System.Drawing.Point(446, 488);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "mm:ss";
+            // 
             // FixMashine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(661, 646);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.monthCalendar);
             this.Controls.Add(this.comboBox3);
@@ -194,7 +207,9 @@
             this.Controls.Add(this.textBoxNumberMan);
             this.Controls.Add(this.textBoxFixTime);
             this.Controls.Add(this.dataGridView);
+            this.MaximizeBox = false;
             this.Name = "FixMashine";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FixMashine";
             this.Load += new System.EventHandler(this.FixMashine_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -220,5 +235,6 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.MonthCalendar monthCalendar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label8;
     }
 }
