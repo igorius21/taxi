@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
@@ -12,7 +8,7 @@ namespace Taxi
 {
     class DbType
     {
-        static string connectionString = @"Data Source=IGORIUS-PK\SQLEXPRESS;Initial Catalog=taxi;Integrated Security=True";
+        static string connectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\taxi6.mdf;Integrated Security=True;Connect Timeout=30";
 
         static int count;
 
@@ -83,7 +79,7 @@ namespace Taxi
 
         public int SqlRequest7(int values1, int values2, int values3, DateTime values4)
         {
-            command.CommandText = "INSERT INTO Расписание (id_маршрута, id_типа_маршрута, id_остановки, Плановое_время_прибытия) VALUES (" + values1 + ", " + values2 + ", " + values3 + ", '" + values4 + "')";
+            command.CommandText = "INSERT INTO Расписание (id_маршрута, id_типа_маршрута, id_остановки, Плановое_время_прибытия) VALUES (" + values1 + ", " + values2 + ", " + values3 + ", " + values4 + ")";
             return connOpen();
         }
 

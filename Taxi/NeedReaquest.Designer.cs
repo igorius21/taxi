@@ -261,7 +261,7 @@
             // labelFamily
             // 
             this.labelFamily.AutoSize = true;
-            this.labelFamily.Location = new System.Drawing.Point(143, 559);
+            this.labelFamily.Location = new System.Drawing.Point(150, 559);
             this.labelFamily.Name = "labelFamily";
             this.labelFamily.Size = new System.Drawing.Size(0, 13);
             this.labelFamily.TabIndex = 24;
@@ -269,7 +269,7 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(210, 564);
+            this.labelName.Location = new System.Drawing.Point(219, 560);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(0, 13);
             this.labelName.TabIndex = 25;
@@ -277,7 +277,7 @@
             // labelSername
             // 
             this.labelSername.AutoSize = true;
-            this.labelSername.Location = new System.Drawing.Point(319, 559);
+            this.labelSername.Location = new System.Drawing.Point(305, 560);
             this.labelSername.Name = "labelSername";
             this.labelSername.Size = new System.Drawing.Size(0, 13);
             this.labelSername.TabIndex = 26;
@@ -295,7 +295,7 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 559);
+            this.comboBox1.Location = new System.Drawing.Point(13, 559);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 28;

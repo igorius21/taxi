@@ -105,6 +105,16 @@
     <Compile Include="Stops.Designer.cs">
       <DependentUpon>Stops.cs</DependentUpon>
     </Compile>
+    <Compile Include="taxi6DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>taxi6DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="taxi6DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>taxi6DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="taxiDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -158,6 +168,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="taxi6DataSet.xsc">
+      <DependentUpon>taxi6DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="taxi6DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>taxi6DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="taxi6DataSet.xss">
+      <DependentUpon>taxi6DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="taxi6DataSet1.xsc">
+      <DependentUpon>taxi6DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="taxi6DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>taxi6DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="taxi6DataSet1.xss">
+      <DependentUpon>taxi6DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="taxiDataSet.xsc">
       <DependentUpon>taxiDataSet.xsd</DependentUpon>
     </None>
@@ -189,6 +221,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="taxi6.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="taxi6_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>taxi6.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

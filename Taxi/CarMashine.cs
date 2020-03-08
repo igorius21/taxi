@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Taxi
@@ -104,7 +98,6 @@ namespace Taxi
 
         private void comboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxRoute.Enabled = true;
 
             int a = db.SqlRequest4(comboBoxDriver.Text, dataGridView.CurrentRow.Cells[0].Value.ToString());
 
@@ -170,6 +163,7 @@ namespace Taxi
         private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             comboBoxDriver.Enabled = true;
+            comboBoxRoute.Enabled = true;
         }
 
         public void BoxDell()

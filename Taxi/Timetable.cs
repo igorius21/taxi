@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Taxi
@@ -19,6 +12,10 @@ namespace Taxi
         }
 
         DbType db = new DbType();
+        string commandText;
+        string connectionString;
+        SqlDataReader dataReader;
+        SqlConnection conn;
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -47,14 +44,22 @@ namespace Taxi
 
         public void ReadRouters()
         {
-            db = new DbType();
+            connectionString = db.ReadTimeTable(out commandText);
 
-            string commandText;
-            string connectionString = db.ReadTimeTable(out commandText);
-            DataTable table = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(commandText, connectionString);
-            adapter.Fill(table);
-            dataGridView.DataSource = table;
+            db.Qwe(out dataReader, out conn, commandText, connectionString);
+
+            while (dataReader.Read())
+            {
+                int id = dataReader.GetInt32(0);
+                int type = dataReader.GetInt32(1);
+                int stop = dataReader.GetInt32(2);
+                DateTime time = dataReader.GetDateTime(3);
+
+                dataGridView.Rows.Add(id, type, stop, time.ToShortTimeString());
+            }
+
+            dataReader.Close();
+            conn.Close();
 
         }
 
