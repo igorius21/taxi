@@ -12,7 +12,7 @@ namespace Taxi
             InitializeComponent();
             ReadComboBox();
             ReadComboRouter();
-            comboBoxRouter.Text = "7";
+            comboBoxRouter.Text = "1";
         }
 
         DbType db = new DbType();
